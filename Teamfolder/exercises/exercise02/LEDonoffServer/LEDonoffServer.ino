@@ -8,7 +8,8 @@ const char* password = "ToDi-PCO";
 
 WebServer server(80);
 
-const int led = D6;
+const int led = D3;
+bool ledStatus = false;
 
 void handleRoot() {
   digitalWrite(led, 1);
@@ -69,13 +70,27 @@ void setup(void) {
 
   //Added Endpoints
   server.on("/on", []() {
-    server.send(200, "text/plain", "LED should now be on");
+    server.send(200, "text/plain", "LED should now be on!");
     digitalWrite(led, 1);
+    ledStatus = true;
   });
 
   server.on("/off", []() {
-    server.send(200, "text/plain", "LED should now be off");
+    server.send(200, "text/plain", "LED should now be off!");
     digitalWrite(led, 0);
+    ledStatus = false;
+  });
+
+  server.on("/toggle", []() {
+  server.send(200, "text/plain", "LED should change the mode now!");
+    if (ledStatus) {
+      digitalWrite(led, 0);
+      ledStatus = false;
+    }
+    else {
+      digitalWrite(led, 1);
+      ledStatus = true;
+    }
   });
 }
 
