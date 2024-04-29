@@ -1,1 +1,0 @@
-# Here we store all the pictures later linked to in the portfolios!

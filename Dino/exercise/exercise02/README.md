@@ -1,8 +1,5 @@
-# Personal Protocol - Pervasive Computing - Dino Ponjevic
+# Personal Protocol - Pervasive Computing
 
-## Lecture 01 - 26.04.2024:
-- [Research records](/Dino/researches/research01/README.md)
+## Lecture 02 - 29.04.2024 - Lab Records:
 
-- [Lab records](/Teamfolder/exercises/exercise01/README.md)
-
-- [Reflection](/Dino/reflections/reflection01/README.md)
+Pin Layout of the Wemos D1 ESP32 can be found [here](/Teamfolder/exercises/exercise02/ESP) 
