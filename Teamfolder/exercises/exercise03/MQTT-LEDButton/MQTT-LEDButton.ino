@@ -10,7 +10,7 @@
 
 #include <WiFi.h>
 #include <WiFiMulti.h>
-
+#include <PubSubClient.h>
 #include <HTTPClient.h>
 
 #define USE_SERIAL Serial
@@ -47,8 +47,37 @@ const char* ca = \
 "KOqkqm57TH2H3eDJAkSnh6/DNFu0Qg==\n" \  
 "-----END CERTIFICATE-----\n";
 */
+const char* ssid = "PonKo-2.4G";
+const char* password = "ToDi-PCO";
+const char* mqtt_server = "192.168.20.1";
 
+WiFiClient espClient;
 const int pushButton = D1;
+PubSubClient client(espClient);
+
+void setup_wifi() {
+
+  delay(10);
+  // We start by connecting to a WiFi network
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  randomSeed(micros());
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
 
 void setup() {
 
@@ -64,9 +93,11 @@ void setup() {
         delay(1000);
     }
 
-    wifiMulti.addAP("PonKo-2.4G", "ToDi-PCO");
-
+    setup_wifi();
+ 
     pinMode(pushButton, INPUT_PULLDOWN);
+
+    client.setServer(mqtt_server, 1883);
 }
 
 bool isLEDon = false;
@@ -95,7 +126,8 @@ void loop() {
         }
         */
 
-        http.begin("http://192.168.20.208:80/toggle");
+        client.publish("mqtt_led", "toggle");
+        //http.begin("http://192.168.20.208:80/toggle");
 
         USE_SERIAL.print("[HTTP] GET...\n");
         // start connection and send HTTP header
