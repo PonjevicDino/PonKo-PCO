@@ -1,10 +1,8 @@
-# Personal Protocol - Pervasive Computing
-
-## Lecture/Exercise 02 - 29.04.2024 - Lab Records:
+# Lecture/Exercise 02 - 29.04.2024 - Lab Records:
 
 ## Overview
-1. [PIN Layout](/Teamfolder/exercises/exercise02/#pin-layout)
-2. [Blinking LED](/Teamfolder/exercises/exercise02/#blinking-led)
+1. [PIN Layout](/Teamfolder/exercises/exercise02/README.md#pin-layout)
+2. [Blinking LED](/Teamfolder/exercises/exercise02/README.md#blinking-led)
 
 ## PIN Layout
 Pin Layout of the Wemos D1 ESP32 can be found [here](/Teamfolder/exercises/exercise02/ESP32-pinout.png) 
