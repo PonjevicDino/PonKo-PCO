@@ -9,13 +9,9 @@
 #include <Arduino.h>
 
 #include <WiFi.h>
-#include <WiFiMulti.h>
 #include <PubSubClient.h>
-#include <HTTPClient.h>
 
 #define USE_SERIAL Serial
-
-WiFiMulti wifiMulti;
 
 /*
 const char* ca = \ 
@@ -50,10 +46,12 @@ const char* ca = \
 const char* ssid = "PonKo-2.4G";
 const char* password = "ToDi-PCO";
 const char* mqtt_server = "192.168.20.1";
+const char* msg = "toggle";
 
 WiFiClient espClient;
-const int pushButton = D1;
 PubSubClient client(espClient);
+
+const int pushButton = D1;
 
 void setup_wifi() {
 
@@ -80,7 +78,7 @@ void setup_wifi() {
 }
 
 void setup() {
-
+    pinMode(pushButton, INPUT_PULLDOWN);
     USE_SERIAL.begin(115200);
 
     USE_SERIAL.println();
@@ -94,63 +92,55 @@ void setup() {
     }
 
     setup_wifi();
- 
-    pinMode(pushButton, INPUT_PULLDOWN);
-
     client.setServer(mqtt_server, 1883);
 }
 
 bool isLEDon = false;
 bool buttonClicked = false;
 
-void loop() {
-  if (digitalRead(pushButton) > 0 && !buttonClicked) {
-    buttonClicked = true;
-    // wait for WiFi connection
-    if((wifiMulti.run() == WL_CONNECTED)) {
-
-        HTTPClient http;
-
-        USE_SERIAL.print("[HTTP] begin...\n");
-        // configure traged server and url
-        //http.begin("https://www.howsmyssl.com/a/check", ca); //HTTPS
-        
-        /* 
-        if (isLEDon) {
-          http.begin("http://192.168.20.208:80/off");
-          isLEDon = false;
-        } //HTTP
-        else {
-          http.begin("http://192.168.20.208:80/on");
-          isLEDon = true;
-        }
-        */
-
-        client.publish("mqtt_led", "toggle");
-        //http.begin("http://192.168.20.208:80/toggle");
-
-        USE_SERIAL.print("[HTTP] GET...\n");
-        // start connection and send HTTP header
-        int httpCode = http.GET();
-
-        // httpCode will be negative on error
-        if(httpCode > 0) {
-            // HTTP header has been send and Server response header has been handled
-            USE_SERIAL.printf("[HTTP] GET... code: %d\n", httpCode);
-
-            // file found at server
-            if(httpCode == HTTP_CODE_OK) {
-                String payload = http.getString();
-                USE_SERIAL.println(payload);
-            }
-        } else {
-            USE_SERIAL.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
-        }
-
-        http.end();
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    // Create a random client ID
+    String clientId = "ESP32Client-";
+    clientId += String(random(0xffff), HEX);
+    // Attempt to connect
+    if (client.connect(clientId.c_str())) {
+      Serial.println("connected");
+      // Once connected, publish an announcement...
+      client.publish("mqtt", "connected");
+      // ... and resubscribe
+      client.subscribe("inTopic");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(5000);
     }
   }
-        
+}
+
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  if (digitalRead(pushButton) > 0 && !buttonClicked) {
+    buttonClicked = true;
+    Serial.print("klicked ");
+
+    USE_SERIAL.print("mqtt begin...\n");
+
+    client.publish("mqtt", msg);
+
+    Serial.print("Publish message: ");
+    Serial.println(msg);
+
+  }
   else {
     buttonClicked = false;
     return;
