@@ -36,3 +36,16 @@ Arduino, Raspberry Pi
 
 #### exercise
 Learning: Do not delete Firewall forwarding :D
+
+## Day 4
+#### trying integrate mqtt within the toggle LED exercice (click button on one esp32 -> toggle LED on other esp32)
+We had our problems with this task. Mainly because we didn't register the client with the "connect" action.
+[Exercises](/Teamfolder/exercises/exercise03/MQTT-ToggleLEDwithButton)
+
+#### Setting up project
+A lot of time was used to install Unity and to let the project initially run. At the end everything worked and we could start with the project.
+- problems: needed Unity Pro, wrong run configs
+
+## Day 5
+#### GPS Signal in Unity
+Getting the GPS Coordinates for the device was relatively easy, the challenging part was to map the coordinates to the 2D Google Maps picture we have in our game.
