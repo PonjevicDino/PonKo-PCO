@@ -37,15 +37,27 @@ Arduino, Raspberry Pi
 #### exercise
 Learning: Do not delete Firewall forwarding :D
 
+
 ## Day 4
 #### trying integrate mqtt within the toggle LED exercice (click button on one esp32 -> toggle LED on other esp32)
 We had our problems with this task. Mainly because we didn't register the client with the "connect" action.
 [Exercises](/Teamfolder/exercises/exercise03/MQTT-ToggleLEDwithButton)
 
-#### Setting up project
+#### Setting up project HideFromLoRaWan
 A lot of time was used to install Unity and to let the project initially run. At the end everything worked and we could start with the project.
 - problems: needed Unity Pro, wrong run configs
 
+
 ## Day 5
-#### GPS Signal in Unity
+#### HideFromLoRaWan: GPS Signal in Unity
 Getting the GPS Coordinates for the device was relatively easy, the challenging part was to map the coordinates to the 2D Google Maps picture we have in our game.
+
+## Day 6, 7, 8, ...
+#### HideFromLoRaWan - Learnings
+- Basics in Unity
+- Using Bluetoth to connect devices with unity to be able to retrieve data. It was pretty hard to find a fitting library to establish such connection via bluetooth. We tried some and were frustrated they did not work. After trying an older version of the library the connection finally worked - this was maybe because the older version did not care that much about restrictions from android.
+- Communication between two Esp's with LoRaWan Sensors. This worked quite well - i was surprised the connection lasted so far... from the FH2 Top to the Hagenberg castle!. We also learned that buildings played a huge role in blocking the signal. Another thing we had to deal with were loose contacts. We thought the program was wrong, but in reality we just hat a loose contact some times. In one scenario we layed down the esp on a windowsill and caused a circuit.
+
+## Last Day
+- not much prior knowledge of certificates -> so most of it was a new learning :)
+
