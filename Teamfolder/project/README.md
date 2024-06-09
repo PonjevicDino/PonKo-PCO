@@ -63,8 +63,8 @@ It is quite easy to store the whole game system in one sentence: "An interactive
 While this sounds easy, the practical part was more complicated. It is not easy to find a free map-provider without using OSM maps and drawing
 them with own and custom code. Of course, this would be possible, but it wouldn't fit the goal of the project well. Therefore we choosed 
 Google as our map-provider - to be precise, the Maps Static API. This API takes a Lat/Lon value and some metadata (map type/quality) as the
-input and provides us with a PNG of the choosen map tile. These API calls are inexpensive (tens of thousends for less than 1€) and Google 
-allocates every user a "test credit" of 300€.
+input and provides us with a PNG of the choosen map tile. These API calls are inexpensive (tens of thousends for less than 1 ) and Google 
+allocates every user a "test credit" of 300 .
 
 ### Step 6: The map
 As described before, the map is just a simple PNG, which is shown in the Background. Furthermore, we implemented a way to move the map with
@@ -74,7 +74,7 @@ dots (a blue one and a red one) are overlaying the map, to show the current post
 ### Step 7: Getting the GPS position and showing it on the map
 Getting the GPS position was easy, because it is as simple as one line of code. - But the hard part was the projection to the map. We knew
 two important values - the center lat/lon of the map and the gps lat/lon. "But by how much has the point to move from the center, if the 
-position changes". Mathematically, we were not able to solve this in a reasonable amount of time, becuase the map was projected with the 
+position changes". Mathematically, we were not able to solve this in a reasonable amount of time, because the map was projected with the 
 Mercator type. Simplified - it is smaller near the equator and bigger near the earths poles.
 
 To solve the problem we just opened the game and went "out of map". At this point, we knew the difference between that GPS position and the
@@ -116,7 +116,6 @@ Decoded version (seperated by "#"):
 ### Step 12: Final optimizations
 At this state, the game was quite playable. We just needed to disable some debug text boxes and to move the buttons, so that they could be 
 used with multiple screen aspect ratios. Furthermore, we also forced the game to the portrait screen rotation mode.
-
 
 ## Presentation and Playtrough:
 Simplified - the presentation of the project and our work was successfull.
