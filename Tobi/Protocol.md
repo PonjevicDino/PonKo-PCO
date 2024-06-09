@@ -1,3 +1,5 @@
+# Personal Protocol - Tobias Kothbauer
+
 ## Day 1
 #### intro
 - choose partner
@@ -22,8 +24,15 @@ Arduino, Raspberry Pi
 [Notepad](/Notepad.docx)
 
 ### Exercises:
-[Exercises](/Teamfolder/exercises/exercise02)
+[Exercise2](/Teamfolder/exercises/exercise02/README.md)
 
+####  ESP32
+I already had some prior knowledge working with an ESP32 from the lecture in the last Semester "Physical Prototyping". But some features of the ESP32 we learned about were nevertheless new to me. We also worked with LED's, which we also have already done in "Physical Prototyping", but it was a good to refresh knowledge.
+During the exercise we got a little bit stuck, because we were not aware of how to use "INPUT_PULLUP" or "INPUT_PULLDOWN" correctly. 
+
+#### Web Requests
+This was new to me and quite fun! We implement two additional endpoints to the Server-Example which allowed us to change the state of the LED when a request
+gets sent to the provided endpoint. We also adapted this example to toggle the state via a button click - quite cool!
 
 
 ## Day 3
@@ -34,8 +43,11 @@ Arduino, Raspberry Pi
 - The data sources publish their data and all recipients who are interested in certain messages (“identified by the topic”) receive the data because they have registered as a subscriber.
 - Wildcard charakters can be used to subscribe to multiple topics at once, eliminating the need to subscribe to each topic individually and reducing overhead. Can only be used for subscritpions and not for publishing. MQTT supports two types of wildcards: + (single-level) and # (multi-level).
 
+I had no prior knowledge in MQTT so it was interesting to learn about it :)
+
 #### exercise
 Learning: Do not delete Firewall forwarding :D
+[Exercise3](/Teamfolder/exercises/exercise03/README.md)
 
 
 ## Day 4
